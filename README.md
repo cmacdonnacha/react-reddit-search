@@ -10,7 +10,7 @@
 
 <br>
 
-<p align="center">This project shows basic subreddit searching based on the Reddit API using ReactJS, Redux Toolkit and Typescript 💻</p>
+<p align="center">This project shows usage of the Reddit API using ReactJS, Redux Toolkit and Typescript 💻</p>
 
 <p align="center">
   <a>
@@ -49,14 +49,14 @@
 
 ## Live Demo
 
-[Check out the live demo](https://cmacdonnacha.github.io/awesome-address-book/)
+[Check out the live demo](https://cmacdonnacha.github.io/react-reddit-search/)
 
 &nbsp;
 
 ## Set up
 
-1. `git clone https://github.com/cmacdonnacha/awesome-address-book.git awesome-address-book`
-2. `cd awesome-address-book`
+1. `git clone https://github.com/cmacdonnacha/react-reddit-search.git react-reddit-search`
+2. `cd react-reddit-search`
 3. `npm install`
 4. That's it! See the **Available Commands** list below.
 
@@ -123,8 +123,8 @@ Licensed under the MIT license.
 <!-- prettier-ignore-start -->
 [npm]: https://www.npmjs.com/
 [node]: https://nodejs.org
-[continuous-integration-badge]: https://github.com/cmacdonnacha/awesome-address-book/workflows/Continuous%20Integration/badge.svg
-[dependencies-badge]: https://img.shields.io/david/cmacdonnacha/awesome-address-book.svg
+[continuous-integration-badge]: https://github.com/cmacdonnacha/react-reddit-search/workflows/Continuous%20Integration/badge.svg
+[dependencies-badge]: https://img.shields.io/david/cmacdonnacha/react-reddit-search.svg
 [package]: https://www.npmjs.com/package/cra-template-ideal-starter
 [typescript]: https://github.com/microsoft/TypeScript
 [redux-toolkit]: https://github.com/reduxjs/redux-toolkit
@@ -136,6 +136,6 @@ Licensed under the MIT license.
 [axios]: https://github.com/axios/axios
 [eslint]: https://eslint.org/
 [prettier]: https://prettier.io/docs/en/index.html
-[github-actions]: https://github.com/cmacdonnacha/awesome-address-book/actions
+[github-actions]: https://github.com/cmacdonnacha/react-reddit-search/actions
 [styled-icons]: https://styled-icons.js.org/
 <!-- prettier-ignore-end -->
