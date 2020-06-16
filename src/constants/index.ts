@@ -1,1 +1,3 @@
-export const REDDIT_API_URL = '`https://www.reddit.com/r/subreddits/search.json?q=reactjs`';
+export const REDDIT_URL = 'https://www.reddit.com';
+export const POSTS_LIMIT = 10;
+export const DEFAULT_SUBREDDIT = 'wallpapers';

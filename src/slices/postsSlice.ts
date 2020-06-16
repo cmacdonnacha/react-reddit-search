@@ -2,17 +2,20 @@ import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit';
 import { RootState } from '.';
 import { Post } from 'models/Post';
 import RedditAPI from 'services/RedditAPI';
+import { REDDIT_URL, POSTS_LIMIT, DEFAULT_SUBREDDIT } from '../constants';
 
 export interface PostsState {
   isLoading: boolean;
   hasErrors: boolean;
   posts: Post[];
+  searchText: string;
 }
 
 export const initialState: PostsState = {
   isLoading: false,
   hasErrors: false,
   posts: [],
+  searchText: '',
 };
 
 // Instead of dealing with reducers, actions, and all as separate files and individually creating all those action types, Redux Toolkit gives us the concept of slices.
@@ -35,11 +38,14 @@ const postsSlice = createSlice({
       state.isLoading = false;
       state.hasErrors = true;
     },
+    searchTextUpdated: (state, action: PayloadAction<string>) => {
+      state.searchText = action.payload;
+    },
   },
 });
 
 // Three actions generated from the slice. We don't have to define them above since they use the same names as the reducers.
-export const { getPostsStarted, getPostsSuccess, getPostsFailed } = postsSlice.actions;
+export const { getPostsStarted, getPostsSuccess, getPostsFailed, searchTextUpdated } = postsSlice.actions;
 
 // A selector which we'll use to access the 'posts' root state from a React component instead of using mapStateToProps (the old way).
 // Note: This is not the `posts` property you see at the top of this file but rather the root Posts state in index.ts. They just share the same name.
@@ -50,11 +56,14 @@ export default postsSlice.reducer;
 
 // Asynchronous thunk action
 export function fetchPosts() {
-  return async (dispatch: Dispatch) => {
-    dispatch(getPostsStarted());
-
+  return async (dispatch: Dispatch, getState: () => RootState) => {
     try {
-      const posts: Post[] = await RedditAPI.getPosts();
+      dispatch(getPostsStarted());
+
+      const subreddit = getState().posts.searchText ? getState().posts.searchText : DEFAULT_SUBREDDIT;
+      const url = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}`;
+
+      const posts: Post[] = await RedditAPI.getPosts(url);
       dispatch(getPostsSuccess(posts));
     } catch (error) {
       dispatch(getPostsFailed());

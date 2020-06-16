@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/macro';
 import Header from 'components/Header';
-import Page from 'components/Page';
+import PostsPage from 'components/PostsPage';
 
 const Layout = styled.div`
   height: 100%;
@@ -14,8 +14,7 @@ function App(): JSX.Element {
   return (
     <Layout>
       <Header />
-
-      <Page />
+      <PostsPage />
     </Layout>
   );
 }
