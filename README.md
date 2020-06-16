@@ -44,6 +44,7 @@
 <span>📞 &nbsp; Mobile friendly / Responsive design</span></br>
 <span>♿ &nbsp; Accessability compliant</span></br>
 <span>🧪 &nbsp; Unit & Integration tests</span></br>
+<span>🚢 &nbsp; Continuos Integration & Deployment</span></br>
 
 &nbsp;
 
@@ -108,7 +109,7 @@ This will run a production build and then analyze the output using [source-map-e
 
 ## CI/CD
 
-This project uses [Github actions]([github-actions]) to continuously test, build and deploy. You can see the workflow file in the [workflows](.github/workflows/continuous-integration-workflow.yml) folder.
+This project uses [Github actions][github-actions] to continuously test, build and deploy. You can see the workflow file in the [workflows](.github/workflows/continuous-integration-workflow.yml) folder.
 
 ![CI/CD Screenshot](https://i.imgur.com/JIGWB38.png)
 

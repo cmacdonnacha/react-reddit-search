@@ -1,6 +1,7 @@
 {
   "name": "react-reddit-search",
   "version": "1.0.0",
+  "homepage": "https://cmacdonnacha.github.io/react-reddit-search/",
   "description": "This project shows usage of the Reddit API using ReactJS, Redux Toolkit and Typescript",
   "license": "MIT",
   "scripts": {
