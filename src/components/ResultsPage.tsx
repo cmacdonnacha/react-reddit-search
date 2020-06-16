@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { colours } from 'constants/colours';
-import PostsList from './PostsList';
+import Posts from './Posts';
 import { postsSelector } from 'slices/postsSlice';
 import Loader from './Loader';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchPosts } from 'slices/postsSlice';
+import PageFooter from './PageFooter';
 
 const Container = styled.section`
   display: flex;
@@ -15,11 +16,7 @@ const Container = styled.section`
   background-color: white;
   margin: 20px;
   border-radius: 5px;
-
-  & h1 {
-    margin: 0;
-    color: ${colours.navy};
-  }
+  padding: 10px;
 `;
 
 const Content = styled.article`
@@ -28,11 +25,15 @@ const Content = styled.article`
   flex-direction: column;
   background-color: white;
   overflow-y: auto;
-  align-items: center;
   border-radius: 5px;
 `;
 
-const PostsPage = () => {
+const Title = styled.h1`
+  color: ${colours.navy};
+  text-transform: capitalize;
+`;
+
+const ResultsPage = () => {
   const { posts, isLoading, hasErrors } = useSelector(postsSelector);
 
   const dispatch = useDispatch();
@@ -54,8 +55,8 @@ const PostsPage = () => {
 
     return (
       <div>
-        <h1>{subreddit}</h1>
-        <PostsList />
+        <Title>{subreddit}</Title>
+        <Posts />
       </div>
     );
   };
@@ -63,8 +64,9 @@ const PostsPage = () => {
   return (
     <Container>
       <Content>{renderPageContent()}</Content>
+      {posts.length > 0 && <PageFooter />}
     </Container>
   );
 };
 
-export default PostsPage;
+export default ResultsPage;

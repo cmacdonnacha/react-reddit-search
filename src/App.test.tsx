@@ -3,12 +3,12 @@ import App from './App';
 import { renderWithRedux } from 'utils/test-utils';
 import { screen } from '@testing-library/react';
 
-test('should render Posts page as default', () => {
+test('should render Results page as default', () => {
   // Arrange
   renderWithRedux(<App />);
 
   // Act
-  const element = screen.getByText('Posts');
+  const element = screen.getByText('Loading', { exact: false });
 
   // Assert
   expect(element).toBeInTheDocument();

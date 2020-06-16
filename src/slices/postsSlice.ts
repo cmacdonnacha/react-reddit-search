@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Action, ThunkDispatch, AnyAction } from '@reduxjs/toolkit';
 import { RootState } from '.';
 import { Post } from 'models/Post';
 import RedditAPI from 'services/RedditAPI';
@@ -9,6 +9,8 @@ export interface PostsState {
   hasErrors: boolean;
   posts: Post[];
   searchText: string;
+  nextPageId: string;
+  previousPageId: string;
 }
 
 export const initialState: PostsState = {
@@ -16,6 +18,8 @@ export const initialState: PostsState = {
   hasErrors: false,
   posts: [],
   searchText: '',
+  nextPageId: '',
+  previousPageId: '',
 };
 
 // Instead of dealing with reducers, actions, and all as separate files and individually creating all those action types, Redux Toolkit gives us the concept of slices.
@@ -41,11 +45,24 @@ const postsSlice = createSlice({
     searchTextUpdated: (state, action: PayloadAction<string>) => {
       state.searchText = action.payload;
     },
+    nextPageIdUpdated: (state, action: PayloadAction<string>) => {
+      state.nextPageId = action.payload;
+    },
+    previousPageIdUpdated: (state, action: PayloadAction<string>) => {
+      state.previousPageId = action.payload;
+    },
   },
 });
 
 // Three actions generated from the slice. We don't have to define them above since they use the same names as the reducers.
-export const { getPostsStarted, getPostsSuccess, getPostsFailed, searchTextUpdated } = postsSlice.actions;
+export const {
+  getPostsStarted,
+  getPostsSuccess,
+  getPostsFailed,
+  searchTextUpdated,
+  nextPageIdUpdated,
+  previousPageIdUpdated,
+} = postsSlice.actions;
 
 // A selector which we'll use to access the 'posts' root state from a React component instead of using mapStateToProps (the old way).
 // Note: This is not the `posts` property you see at the top of this file but rather the root Posts state in index.ts. They just share the same name.
@@ -54,17 +71,53 @@ export const postsSelector = (state: RootState) => state.posts;
 // The reducer. Again this is exposed by the 'postsSlice' object created above. In the old Redux this was the equivalent to returning the current posts state inside a separate `postsReducer.ts` file.
 export default postsSlice.reducer;
 
-// Asynchronous thunk action
-export function fetchPosts() {
-  return async (dispatch: Dispatch, getState: () => RootState) => {
+function getSelectedSubreddit(state: PostsState) {
+  const subreddit = state.searchText ? state.searchText : DEFAULT_SUBREDDIT;
+  return subreddit;
+}
+
+// Asynchronous thunk action to fetch posts
+export function fetchPosts(customUrl?: string) {
+  return async (dispatch: ThunkDispatch<RootState, AnyAction, Action>, getState: () => RootState) => {
     try {
       dispatch(getPostsStarted());
 
-      const subreddit = getState().posts.searchText ? getState().posts.searchText : DEFAULT_SUBREDDIT;
-      const url = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}`;
+      const subreddit = getSelectedSubreddit(getState().posts);
+      const defaultUrl = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}`;
+      const url = customUrl || defaultUrl;
 
-      const posts: Post[] = await RedditAPI.getPosts(url);
-      dispatch(getPostsSuccess(posts));
+      const data = await RedditAPI.getPosts(url);
+      dispatch(getPostsSuccess(data.posts));
+      dispatch(nextPageIdUpdated(data.nextPageId));
+      dispatch(previousPageIdUpdated(data.previousPageId));
+    } catch (error) {
+      dispatch(getPostsFailed());
+    }
+  };
+}
+
+// Asynchronous thunk action to fetch posts of next page
+export function fetchNextPosts() {
+  return async (dispatch: ThunkDispatch<RootState, AnyAction, Action>, getState: () => RootState) => {
+    try {
+      const subreddit = getSelectedSubreddit(getState().posts);
+      const url = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}&count=10&after=${getState().posts.nextPageId}`;
+
+      dispatch(fetchPosts(url));
+    } catch (error) {
+      dispatch(getPostsFailed());
+    }
+  };
+}
+
+// Asynchronous thunk action to fetch posts of previous page
+export function fetchPreviousPosts() {
+  return async (dispatch: ThunkDispatch<RootState, AnyAction, Action>, getState: () => RootState) => {
+    try {
+      const subreddit = getSelectedSubreddit(getState().posts);
+      const url = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}&count=10&before=${getState().posts.previousPageId}`;
+
+      dispatch(fetchPosts(url));
     } catch (error) {
       dispatch(getPostsFailed());
     }

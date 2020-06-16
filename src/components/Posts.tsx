@@ -6,13 +6,9 @@ import { Post } from 'models/Post';
 
 const Container = styled.div`
   display: flex;
-  flex: 1;
-  background-color: white;
-  justify-content: center;
-  align-items: center;
 `;
 
-const PostsList = () => {
+const Posts = () => {
   const { posts } = useSelector(postsSelector);
 
   return (
@@ -26,4 +22,4 @@ const PostsList = () => {
   );
 };
 
-export default PostsList;
+export default Posts;

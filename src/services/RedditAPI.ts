@@ -5,6 +5,8 @@ const RedditAPI = {
   getPosts: async (url: string) => {
     const response = await FetchAPI.get(url);
     const data = response.data.children;
+    const nextPageId = response.data.after;
+    const previousPageId = response.data.before;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const posts: Post[] = data.map((post: any) => {
@@ -15,7 +17,11 @@ const RedditAPI = {
       };
     });
 
-    return posts;
+    return {
+      posts,
+      nextPageId,
+      previousPageId,
+    };
   },
 };
 
