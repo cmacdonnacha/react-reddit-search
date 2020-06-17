@@ -1,13 +1,12 @@
 export const colours = {
-  primary: '#3a529c',
-  secondary: '#1ca9f0',
-  white: '#ffffff',
-  black: '#000000',
+  lightBlue: '#1ca9f0',
   grey: '#ededf7',
   grey2: '#e3e3ea',
   grey3: '#b1b1b7',
   grey4: '#747481',
   grey5: '#6E6E6E',
-  offWhite: '#f4f5f9',
-  navy: '#495576',
+  offWhite: '#f2f7fb',
+  navy: '#2a3c4b',
+  orange: '#ff4702',
+  lightOrange: '#fff4f0',
 };

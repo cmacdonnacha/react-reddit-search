@@ -10,6 +10,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
   min-width: 100px;
   min-height: 100px;
 `;
@@ -27,7 +30,7 @@ const Dot = styled.span`
   width: 20px;
   height: 20px;
   border-radius: 100%;
-  background-color: ${colours.secondary};
+  background-color: ${colours.lightBlue};
   margin: 35px 5px;
 
   &:nth-child(1) {

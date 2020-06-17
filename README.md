@@ -111,7 +111,7 @@ This will run a production build and then analyze the output using [source-map-e
 
 This project uses [Github actions][github-actions] to continuously test, build and deploy. You can see the workflow file in the [workflows](.github/workflows/continuous-integration-workflow.yml) folder.
 
-![CI/CD Screenshot](https://i.imgur.com/JIGWB38.png)
+![CI/CD Screenshot](https://i.imgur.com/FGC93YO.png)
 
 &nbsp;
 

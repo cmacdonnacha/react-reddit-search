@@ -5,14 +5,16 @@ import { fetchPreviousPosts, fetchNextPosts } from 'slices/postsSlice';
 
 const Footer = styled.footer`
   display: flex;
-  flex: 1;
-  background-color: white;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex: 1;
+  background-color: white;
+  max-height: 30px;
 `;
 
 const PageNumber = styled.span`
-  padding: 10px;
+  padding: 0 10px;
 `;
 
 const PageFooter = () => {

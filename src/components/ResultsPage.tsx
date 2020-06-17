@@ -16,27 +16,32 @@ const Container = styled.section`
   background-color: white;
   margin: 20px;
   border-radius: 5px;
-  padding: 10px;
+  padding: 20px;
+  overflow: hidden;
 `;
 
-const Content = styled.article`
+const Content = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: column;
-  background-color: white;
-  overflow-y: auto;
-  border-radius: 5px;
+  flex: 2;
+  /* align-items: center;
+  justify-content: center; */
+  overflow: hidden;
 `;
 
 const Title = styled.h1`
   color: ${colours.navy};
   text-transform: capitalize;
+  margin-top: 0;
 `;
 
 const ResultsPage = () => {
   const { posts, isLoading, hasErrors } = useSelector(postsSelector);
-
   const dispatch = useDispatch();
+
+  // Once the posts have successfully loaded then display the selected subreddit
+  // Using optional chaining "?" to ensure the first post is not null before accessing the subreddit property.
+  const subreddit = posts[0]?.subreddit;
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -51,18 +56,12 @@ const ResultsPage = () => {
       return <span>Could not find subreddit</span>;
     }
 
-    const subreddit = posts[0]?.subreddit;
-
-    return (
-      <div>
-        <Title>{subreddit}</Title>
-        <Posts />
-      </div>
-    );
+    return <Posts />;
   };
 
   return (
     <Container>
+      <Title>{subreddit}</Title>
       <Content>{renderPageContent()}</Content>
       {posts.length > 0 && <PageFooter />}
     </Container>

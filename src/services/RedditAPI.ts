@@ -14,6 +14,7 @@ const RedditAPI = {
         id: post.data.id,
         title: post.data.title,
         subreddit: post.data.subreddit,
+        thumbnail: post.data.thumbnail,
       };
     });
 

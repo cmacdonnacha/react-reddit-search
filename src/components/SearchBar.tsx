@@ -23,8 +23,8 @@ const Input = styled.input`
   font-size: 1rem;
 
   &:focus {
-    border-color: ${colours.secondary};
-    outline: ${colours.secondary};
+    border-color: ${colours.lightBlue};
+    outline: ${colours.lightBlue};
   }
 
   @media (max-width: ${screenSize.medium}) {
