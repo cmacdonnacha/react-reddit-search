@@ -16,18 +16,20 @@ const Input = styled.input`
   border-radius: 3px;
   border: solid 2px ${colours.grey3};
   padding: 0 10px;
-  margin: 20px 40px;
   box-shadow: 0 11px 13px -6px rgba(135, 142, 192, 0.15);
   flex: 1;
   font-size: 1rem;
+  max-width: 700px;
+  margin: 20px auto;
 
   &:focus {
     border-color: ${colours.blue};
     outline: ${colours.blue};
   }
 
+  /* Adjust margins on smaller screens */
   @media (max-width: ${screenSize.medium}) {
-    margin: 20px 15px;
+    margin: 20px;
   }
 `;
 

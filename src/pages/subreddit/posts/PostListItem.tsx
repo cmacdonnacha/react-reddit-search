@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { Post } from 'models/Post';
 import { colours } from 'constants/colours';
 import { screenSize } from 'constants/screenSizes';
-import redditIcon from 'assets/reddit-icon.png';
+import redditIcon from 'assets/reddit-icon-square.png';
 import VotingControls from './VotingControls';
 
 interface Props {
@@ -19,6 +19,7 @@ const Container = styled.div`
   padding: 12px;
   margin: 10px 0;
 
+  /* Apply styles on larger screens */
   @media (min-width: ${screenSize.medium}) {
     margin-right: 20px;
 

@@ -22,10 +22,10 @@ const Container = styled.section`
   padding: 20px;
   overflow: hidden;
 
-  @media (min-width: ${screenSize.medium}) {
-    max-width: 1080px;
+  /* Center the page content on larger screens */
+  @media (min-width: ${screenSize.extraLarge}) {
     align-self: center;
-    width: 100%;
+    width: 1080px;
   }
 `;
 

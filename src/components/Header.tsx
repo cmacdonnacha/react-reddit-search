@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { screenSize } from 'constants/screenSizes';
 import redditLogo from 'assets/reddit-logo.png';
-import redditIcon from 'assets/reddit-icon.png';
+import redditIcon from 'assets/reddit-icon-circle.png';
 import SearchBar from './SearchBar';
 import userProfileImage from 'assets/user-profile.png';
 import Avatar from './Avatar';
@@ -21,8 +21,10 @@ const Container = styled.header`
 `;
 
 const RedditLogo = styled.img`
+  margin-right: 35px;
   height: 30px;
 
+  /* Hide the logo on smaller screens */
   @media (max-width: ${screenSize.medium}) {
     display: none;
   }
@@ -31,13 +33,14 @@ const RedditLogo = styled.img`
 const RedditIcon = styled.img`
   height: 30px;
 
+  /* Show the icon on smaller screens */
   @media (min-width: ${screenSize.medium}) {
     display: none;
   }
 `;
 
 const Username = styled.span`
-  margin-right: 15px;
+  margin: 0 15px 0 30px;
 
   @media (max-width: ${screenSize.medium}) {
     display: none;
@@ -61,7 +64,7 @@ const Header = () => {
       <RedditLogo src={redditLogo} alt="Reddit Logo" />
       <RedditIcon src={redditIcon} alt="Reddit Logo" />
       <SearchBar placeholder={'Type a subreddit name'} onSearchTextChanged={debouncedSearch} type="search" ariaLabel="Search Bar" />
-      <Username>Cathal Mac Donnacha</Username>
+      <Username>Lestor Freeman</Username>
       <Avatar src={userProfileImage} alt="User Profile Image" />
     </Container>
   );
