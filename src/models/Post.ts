@@ -3,4 +3,5 @@ export interface Post {
   title: string;
   subreddit: string;
   thumbnail: string;
+  upvotes: number;
 }

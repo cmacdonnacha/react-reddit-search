@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchPosts } from 'slices/postsSlice';
 import PageFooter from './PageFooter';
+import { screenSize } from 'constants/screenSizes';
 
 const Container = styled.section`
   display: flex;
@@ -18,14 +19,18 @@ const Container = styled.section`
   border-radius: 5px;
   padding: 20px;
   overflow: hidden;
+
+  @media (min-width: ${screenSize.medium}) {
+    max-width: 1080px;
+    align-self: center;
+    width: 100%;
+  }
 `;
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   flex: 2;
-  /* align-items: center;
-  justify-content: center; */
   overflow: hidden;
 `;
 

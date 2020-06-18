@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch } from 'react-redux';
 import { fetchPreviousPosts, fetchNextPosts } from 'slices/postsSlice';
+import Button from './Button';
 
 const Footer = styled.footer`
   display: flex;
@@ -35,16 +36,16 @@ const PageFooter = () => {
     if (pageNumber === 1) {
       return (
         <Footer>
-          <button onClick={onNextPressed}>Next</button>
+          <Button onClick={onNextPressed}>Next</Button>
         </Footer>
       );
     }
 
     return (
       <Footer>
-        <button onClick={onPreviousPressed}>Previous</button>
+        <Button onClick={onPreviousPressed}>Previous</Button>
         <PageNumber>Page {pageNumber}</PageNumber>
-        <button onClick={onNextPressed}>Next</button>
+        <Button onClick={onNextPressed}>Next</Button>
       </Footer>
     );
   };

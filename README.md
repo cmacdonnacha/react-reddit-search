@@ -84,10 +84,6 @@ Displays the code coverage within the console and also generates a coverage fold
 
 > To view the code coverage report in your browser open the `index.html` file within the `coverage/lcov-report` folder.
 
-### `npm run test:e2e`
-
-Runs end-to-end tests using [Cypress][cypress]. This will run using the Electron (headless) browser which comes with Cypress. You can also view the latest test runs online via this project's [Cypress Dashboard](https://dashboard.cypress.io/projects/qcywts/runs)
-
 ### `npm run test:open`
 
 Runs end-to-end tests and opens a window to see the results running on your machine.
