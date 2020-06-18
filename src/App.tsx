@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import Header from 'components/Header';
-import ResultsPage from 'components/ResultsPage';
+import SubredditPage from 'pages/subreddit/SubredditPage';
 
 const Layout = styled.div`
   height: 100%;
@@ -14,7 +14,7 @@ function App(): JSX.Element {
   return (
     <Layout>
       <Header />
-      <ResultsPage />
+      <SubredditPage />
     </Layout>
   );
 }

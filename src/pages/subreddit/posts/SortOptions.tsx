@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import Select from './Select';
-import TextButton from './TextButton';
+import Select from '../../../components/Select';
+import TextButton from '../../../components/TextButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { sortByUpdated, pageNumberUpdated, postsSelector } from 'slices/postsSlice';
 import { screenSize } from 'constants/screenSizes';
@@ -14,7 +14,7 @@ const Container = styled.div`
 `;
 
 // For larger screens, display the sorting options as buttons.
-const HorizontalSortSelection = styled.div`
+const SortButtons = styled.div`
   display: flex;
 
   @media (max-width: ${screenSize.medium}) {
@@ -23,13 +23,13 @@ const HorizontalSortSelection = styled.div`
 `;
 
 // On smaller screens the sorting options will be displayed as a dropdown
-const SortSelectContainer = styled.div`
+const SortDropdown = styled.div`
   @media (min-width: ${screenSize.medium}) {
     display: none;
   }
 `;
 
-const PostsSortSelection = () => {
+const SortOptions = () => {
   const sorts = ['Hot', 'New', 'Top', 'Controversial', 'Rising'];
   const dispatch = useDispatch();
   const { sortBy } = useSelector(postsSelector);
@@ -48,7 +48,7 @@ const PostsSortSelection = () => {
   };
 
   // Display sort options as buttons spanning horizontally
-  const horizontalSortOptions = sorts.map((sort, index) => (
+  const sortButtons = sorts.map((sort, index) => (
     <TextButton key={index} isActive={isSelected(sort)} onClick={() => handleSortChanged(sort)}>
       {sort}
     </TextButton>
@@ -57,14 +57,14 @@ const PostsSortSelection = () => {
   return (
     <Container>
       {/* HorizontalSortSelection is displayed on larger screens */}
-      <HorizontalSortSelection>{horizontalSortOptions}</HorizontalSortSelection>
+      <SortButtons>{sortButtons}</SortButtons>
 
       {/* SortSelectContainer is displayed on smaller screens */}
-      <SortSelectContainer>
+      <SortDropdown>
         <Select onOptionChanged={handleSortChanged} options={sorts} ariaLabel="Sort Select" />
-      </SortSelectContainer>
+      </SortDropdown>
     </Container>
   );
 };
 
-export default PostsSortSelection;
+export default SortOptions;

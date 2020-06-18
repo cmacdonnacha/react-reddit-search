@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { colours } from 'constants/colours';
-import Posts from './Posts';
+import Posts from './posts/Posts';
 import { postsSelector } from 'slices/postsSlice';
-import Loader from './Loader';
+import Loader from '../../components/Loader';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchPosts } from 'slices/postsSlice';
 import PageFooter from './PageFooter';
 import { screenSize } from 'constants/screenSizes';
 import NoSubredditFound from './NoSubredditFound';
-import PostsSortSelection from './PostsSortSelection';
+import SortOptions from './posts/SortOptions';
 
 const Container = styled.section`
   display: flex;
@@ -29,7 +29,7 @@ const Container = styled.section`
   }
 `;
 
-const Content = styled.div`
+const MainContent = styled.div`
   display: flex;
   flex-direction: column;
   flex: 2;
@@ -49,7 +49,7 @@ const Title = styled.h1`
   flex: 2;
 `;
 
-const ResultsPage = () => {
+const SubredditPage = () => {
   // Use object destructuring to get what we need from the "posts" state.
   const { posts, isLoading, hasErrors, sortBy, searchText } = useSelector(postsSelector);
   const dispatch = useDispatch();
@@ -82,13 +82,13 @@ const ResultsPage = () => {
       {posts.length > 0 && !hasErrors && (
         <PageHeaderContainer>
           <Title>{subreddit}</Title>
-          <PostsSortSelection />
+          <SortOptions />
         </PageHeaderContainer>
       )}
-      <Content>{renderPageContent()}</Content>
+      <MainContent>{renderPageContent()}</MainContent>
       {posts.length > 0 && !hasErrors && <PageFooter />}
     </Container>
   );
 };
 
-export default ResultsPage;
+export default SubredditPage;

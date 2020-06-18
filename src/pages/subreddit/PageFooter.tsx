@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPreviousPosts, fetchNextPosts, postsSelector, pageNumberUpdated } from 'slices/postsSlice';
-import Button from './Button';
+import Button from 'components/Button';
 
 const Footer = styled.footer`
   display: flex;

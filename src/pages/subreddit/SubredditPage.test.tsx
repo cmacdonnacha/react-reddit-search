@@ -1,5 +1,5 @@
 import React from 'react';
-import ResultsPage from './ResultsPage';
+import SubredditPage from './SubredditPage';
 import { renderWithRedux } from 'utils/test-utils';
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import axios from 'axios';
@@ -42,7 +42,7 @@ describe('Fetching Posts', () => {
   test('should find and display posts', async () => {
     // Setup
     fetchMockPosts();
-    renderWithRedux(<ResultsPage />);
+    renderWithRedux(<SubredditPage />);
 
     // Wait for loading text to disappear so we know the mocked posts have been fetched and displayed
     await waitForElementToBeRemoved(() => screen.queryByText('Loading posts', { exact: false }));
@@ -54,7 +54,7 @@ describe('Fetching Posts', () => {
   test('should display upvotes', async () => {
     // Setup
     fetchMockPosts();
-    renderWithRedux(<ResultsPage />);
+    renderWithRedux(<SubredditPage />);
 
     // Wait for loading text to disappear so we know the mocked posts have been fetched and displayed
     await waitForElementToBeRemoved(() => screen.queryByText('Loading posts', { exact: false }));
@@ -66,7 +66,7 @@ describe('Fetching Posts', () => {
   test('should display subreddit title', async () => {
     // Setup
     fetchMockPosts();
-    renderWithRedux(<ResultsPage />);
+    renderWithRedux(<SubredditPage />);
 
     // Wait for loading text to disappear so we know the mocked posts have been fetched and displayed
     await waitForElementToBeRemoved(() => screen.queryByText('Loading posts', { exact: false }));
@@ -80,7 +80,7 @@ describe('Error and Loading states', () => {
   test('should display loading text while fetching posts', async () => {
     // Setup
     fetchMockPosts();
-    renderWithRedux(<ResultsPage />);
+    renderWithRedux(<SubredditPage />);
 
     // Should find loading text
     expect(screen.getByText(`Loading posts...`)).toBeInTheDocument();
@@ -88,7 +88,7 @@ describe('Error and Loading states', () => {
 
   test('should display error message when an error occurs while fetching posts', async () => {
     // Setup
-    renderWithRedux(<ResultsPage />);
+    renderWithRedux(<SubredditPage />);
 
     // Wait for loading text to disappear so we know the mocked posts have been fetched and displayed
     await waitForElementToBeRemoved(() => screen.queryByText('Loading posts', { exact: false }));

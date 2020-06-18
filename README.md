@@ -62,7 +62,9 @@
 1. `git clone https://github.com/cmacdonnacha/react-reddit-search.git react-reddit-search`
 2. `cd react-reddit-search`
 3. `npm install`
-4. That's it! See the **Available Commands** list below.
+4. `npm start`
+5. Go to http://localhost:3000/react-reddit-search
+6. That's it! See the **Available Commands** list below for more.
 
 &nbsp;
 

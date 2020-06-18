@@ -1,5 +1,5 @@
 import React from 'react';
-import ResultsPage from './ResultsPage';
+import SubredditPage from './SubredditPage';
 import { renderWithRedux } from 'utils/test-utils';
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import axios from 'axios';
@@ -41,7 +41,7 @@ beforeEach(() => axiosMock.get.mockReset());
 test('should not display previous button by default', async () => {
   // Setup
   fetchMockPosts();
-  renderWithRedux(<ResultsPage />);
+  renderWithRedux(<SubredditPage />);
 
   // Wait for loading text to disappear so we know the mocked posts have been fetched and displayed
   await waitForElementToBeRemoved(() => screen.queryByText('Loading posts', { exact: false }));
@@ -53,7 +53,7 @@ test('should not display previous button by default', async () => {
 test('should display next button by default', async () => {
   // Setup
   fetchMockPosts();
-  renderWithRedux(<ResultsPage />);
+  renderWithRedux(<SubredditPage />);
 
   // Wait for loading text to disappear so we know the mocked posts have been fetched and displayed
   await waitForElementToBeRemoved(() => screen.queryByText('Loading posts', { exact: false }));
@@ -65,7 +65,7 @@ test('should display next button by default', async () => {
 test('should display previous button after clicking the next button', async () => {
   // Setup
   fetchMockPosts();
-  renderWithRedux(<ResultsPage />);
+  renderWithRedux(<SubredditPage />);
 
   // Wait for loading text to disappear so we know the mocked posts have been fetched and displayed
   await waitForElementToBeRemoved(() => screen.queryByText('Loading posts', { exact: false }));
@@ -80,7 +80,7 @@ test('should display previous button after clicking the next button', async () =
 test('should display correct page number after clicking the next button', async () => {
   // Setup
   fetchMockPosts();
-  renderWithRedux(<ResultsPage />);
+  renderWithRedux(<SubredditPage />);
 
   // Wait for loading text to disappear so we know the mocked posts have been fetched and displayed
   await waitForElementToBeRemoved(() => screen.queryByText('Loading posts', { exact: false }));
@@ -95,7 +95,7 @@ test('should display correct page number after clicking the next button', async 
 test('should not display page number by default', async () => {
   // Setup
   fetchMockPosts();
-  renderWithRedux(<ResultsPage />);
+  renderWithRedux(<SubredditPage />);
 
   // Wait for loading text to disappear so we know the mocked posts have been fetched and displayed
   await waitForElementToBeRemoved(() => screen.queryByText('Loading posts', { exact: false }));
@@ -107,7 +107,7 @@ test('should not display page number by default', async () => {
 test('should not display page number after clicking next button and previous button', async () => {
   // Setup
   fetchMockPosts();
-  renderWithRedux(<ResultsPage />);
+  renderWithRedux(<SubredditPage />);
 
   // Wait for loading text to disappear so we know the mocked posts have been fetched and displayed
   await waitForElementToBeRemoved(() => screen.queryByText('Loading posts', { exact: false }));
