@@ -51,11 +51,11 @@ const VoteButton = styled.button`
 const VotingControls = ({ votes }: Props) => {
   return (
     <Container>
-      <VoteButton title="Feature not yet available">
+      <VoteButton title="Feature not yet available" aria-label="Upvote Button">
         <UpvoteIcon size={32} />
       </VoteButton>
       <UpvotesText>{votes}</UpvotesText>
-      <VoteButton title="Feature not yet available">
+      <VoteButton title="Feature not yet available" aria-label="Downvote Button">
         <DownvoteIcon size={32} />
       </VoteButton>
     </Container>

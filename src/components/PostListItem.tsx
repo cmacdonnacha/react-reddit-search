@@ -44,15 +44,16 @@ const Title = styled.h4`
 `;
 
 const PostListItem = ({ post }: Props) => {
-  // Use the default reddit icon if a thumbnail is not found (e.g it's a self post)
+  // Use the default reddit icon if a thumbnail url is not found (e.g it's a self post)
   const postThumbnail = !post.thumbnail || post.thumbnail === 'self' ? redditIcon : post.thumbnail;
   const [thumbnail, setThumbnail] = useState(postThumbnail);
 
-  // If we do receive a url but the image fails to load then fallback.
+  // If we do receive a url but the image fails to load then fallback to the default reddit icon.
   // We don't rely on this by default as waiting for the "onError" event would cause a slight delay.
   const onImageLoadFailed = () => {
     setThumbnail(redditIcon);
   };
+
   return (
     <Container>
       <Thumbnail src={thumbnail} alt="Post Thumbnail" onError={onImageLoadFailed}></Thumbnail>

@@ -4,7 +4,7 @@ import styled from 'styled-components/macro';
 interface Props {
   src: string;
   size?: string;
-  alt?: string;
+  alt: string;
 }
 
 const Image = styled.img<Props>`

@@ -28,6 +28,8 @@
       "src/**/*.{js,ts,tsx}",
       "!/node_modules/",
       "!src/utils/**/*",
+      "!src/models/**/*",
+      "!src/constants/**/*",
       "!src/index.tsx",
       "!src/serviceWorker.ts",
       "!src/react-app-env.d.ts"

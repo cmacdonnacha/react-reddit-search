@@ -14,9 +14,9 @@ const Container = styled.button<Props>`
   justify-content: center;
   font-size: 1rem;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
   color: white;
-  background-color: ${colours.lightBlue};
+  background-color: ${colours.blue};
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   height: 40px;

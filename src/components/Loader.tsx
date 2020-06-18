@@ -30,7 +30,7 @@ const Dot = styled.span`
   width: 20px;
   height: 20px;
   border-radius: 100%;
-  background-color: ${colours.lightBlue};
+  background-color: ${colours.blue};
   margin: 35px 5px;
 
   &:nth-child(1) {

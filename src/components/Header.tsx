@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/macro';
 import { screenSize } from 'constants/screenSizes';
 import redditLogo from 'assets/reddit-logo.png';
@@ -7,7 +7,7 @@ import SearchBar from './SearchBar';
 import userProfileImage from 'assets/user-profile.png';
 import Avatar from './Avatar';
 import { useDispatch } from 'react-redux';
-import { searchTextUpdated, fetchPosts } from 'slices/postsSlice';
+import { searchTextUpdated } from 'slices/postsSlice';
 import debounce from 'lodash/debounce';
 
 const Container = styled.header`
@@ -46,25 +46,23 @@ const Username = styled.span`
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [searchText, setSearchText] = useState('');
 
   const handleSearchTextChanged = (text: string) => {
-    setSearchText(text);
+    // Update the store with the latest search text
     dispatch(searchTextUpdated(text));
-    dispatch(fetchPosts());
   };
 
   // Only perform the search 500ms after the user has stopped typing.
-  // This helps reduce unnecessary network requests
+  // This helps reduce unnecessary network requests.
   const debouncedSearch = debounce(handleSearchTextChanged, 500);
 
   return (
     <Container>
-      <RedditLogo src={redditLogo} />
-      <RedditIcon src={redditIcon} />
-      <SearchBar placeholder={'Type a subreddit name'} onSearchTextChanged={debouncedSearch} value={searchText} type="search" />
+      <RedditLogo src={redditLogo} alt="Reddit Logo" />
+      <RedditIcon src={redditIcon} alt="Reddit Logo" />
+      <SearchBar placeholder={'Type a subreddit name'} onSearchTextChanged={debouncedSearch} type="search" ariaLabel="Search Bar" />
       <Username>Cathal Mac Donnacha</Username>
-      <Avatar src={userProfileImage} />
+      <Avatar src={userProfileImage} alt="User Profile Image" />
     </Container>
   );
 };

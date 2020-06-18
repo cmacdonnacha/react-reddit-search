@@ -11,6 +11,8 @@ export interface PostsState {
   searchText: string;
   nextPageId: string;
   previousPageId: string;
+  sortBy: string;
+  pageNumber: number;
 }
 
 export const initialState: PostsState = {
@@ -20,6 +22,8 @@ export const initialState: PostsState = {
   searchText: '',
   nextPageId: '',
   previousPageId: '',
+  sortBy: 'hot',
+  pageNumber: 1,
 };
 
 // Instead of dealing with reducers, actions, and all as separate files and individually creating all those action types, Redux Toolkit gives us the concept of slices.
@@ -51,6 +55,12 @@ const postsSlice = createSlice({
     previousPageIdUpdated: (state, action: PayloadAction<string>) => {
       state.previousPageId = action.payload;
     },
+    sortByUpdated: (state, action: PayloadAction<string>) => {
+      state.sortBy = action.payload.toLowerCase();
+    },
+    pageNumberUpdated: (state, action: PayloadAction<number>) => {
+      state.pageNumber = action.payload;
+    },
   },
 });
 
@@ -62,6 +72,8 @@ export const {
   searchTextUpdated,
   nextPageIdUpdated,
   previousPageIdUpdated,
+  sortByUpdated,
+  pageNumberUpdated,
 } = postsSlice.actions;
 
 // A selector which we'll use to access the 'posts' root state from a React component instead of using mapStateToProps (the old way).
@@ -78,7 +90,11 @@ export function fetchPosts(customUrl?: string) {
       dispatch(getPostsStarted());
 
       const baseUrl = RedditAPI.getBaseUrl(getState());
+
+      // If we don't receive a custom url as a parameter then use the default base url.
       const url = customUrl || baseUrl;
+
+      // Get the posts and page ids using our RedditAPI service
       const data = await RedditAPI.getPosts(url);
 
       dispatch(getPostsSuccess(data.posts));

@@ -10,6 +10,7 @@ import { fetchPosts } from 'slices/postsSlice';
 import PageFooter from './PageFooter';
 import { screenSize } from 'constants/screenSizes';
 import NoSubredditFound from './NoSubredditFound';
+import PostsSortSelection from './PostsSortSelection';
 
 const Container = styled.section`
   display: flex;
@@ -35,30 +36,41 @@ const Content = styled.div`
   overflow: hidden;
 `;
 
+const PageHeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 const Title = styled.h1`
   color: ${colours.navy};
   text-transform: capitalize;
-  margin-top: 0;
+  margin: 0;
+  flex: 2;
 `;
 
 const ResultsPage = () => {
-  const { posts, isLoading, hasErrors } = useSelector(postsSelector);
+  // Use object destructuring to get what we need from the "posts" state.
+  const { posts, isLoading, hasErrors, sortBy, searchText } = useSelector(postsSelector);
   const dispatch = useDispatch();
 
   // Once the posts have successfully loaded then display the selected subreddit
   // Using optional chaining "?" to ensure the first post is not null before accessing the subreddit property.
   const subreddit = posts[0]?.subreddit;
 
+  // Handles fetching posts. This hook will fire each time any of the passed dependencies change
   useEffect(() => {
     dispatch(fetchPosts());
-  }, [dispatch]);
+  }, [dispatch, sortBy, searchText]);
 
   const renderPageContent = () => {
+    // Display loader while fetching posts
     if (isLoading) {
       return <Loader text={'Loading posts...'} />;
     }
 
-    if (hasErrors) {
+    // Give user feedback when subreddit not found
+    if (hasErrors || (!isLoading && posts.length === 0)) {
       return <NoSubredditFound />;
     }
 
@@ -67,7 +79,12 @@ const ResultsPage = () => {
 
   return (
     <Container>
-      {!hasErrors && <Title>{subreddit}</Title>}
+      {posts.length > 0 && !hasErrors && (
+        <PageHeaderContainer>
+          <Title>{subreddit}</Title>
+          <PostsSortSelection />
+        </PageHeaderContainer>
+      )}
       <Content>{renderPageContent()}</Content>
       {posts.length > 0 && !hasErrors && <PageFooter />}
     </Container>

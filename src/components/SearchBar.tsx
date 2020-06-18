@@ -22,8 +22,8 @@ const Input = styled.input`
   font-size: 1rem;
 
   &:focus {
-    border-color: ${colours.lightBlue};
-    outline: ${colours.lightBlue};
+    border-color: ${colours.blue};
+    outline: ${colours.blue};
   }
 
   @media (max-width: ${screenSize.medium}) {
@@ -39,7 +39,7 @@ const SearchBar = ({ placeholder, value, ariaLabel, type, onSearchTextChanged }:
     // Set the local state
     setInputText(e.target.value);
 
-    // Also let the parent know the search text has changed if used.
+    // Also let the parent know the search text has changed
     onSearchTextChanged(e.target.value);
   };
 

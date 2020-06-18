@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/macro';
-import { useDispatch } from 'react-redux';
-import { fetchPreviousPosts, fetchNextPosts } from 'slices/postsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPreviousPosts, fetchNextPosts, postsSelector, pageNumberUpdated } from 'slices/postsSlice';
 import Button from './Button';
 
 const Footer = styled.footer`
@@ -19,17 +19,18 @@ const PageNumber = styled.span`
 `;
 
 const PageFooter = () => {
-  const [pageNumber, setPageNumber] = useState<number>(1);
+  // Setting pageNumber in store. This allows us to easily reset it later when changing sort option.
+  const { pageNumber } = useSelector(postsSelector);
   const dispatch = useDispatch();
 
   const onNextPressed = () => {
     dispatch(fetchNextPosts());
-    setPageNumber(pageNumber + 1);
+    dispatch(pageNumberUpdated(pageNumber + 1));
   };
 
   const onPreviousPressed = () => {
     dispatch(fetchPreviousPosts());
-    setPageNumber(pageNumber - 1);
+    dispatch(pageNumberUpdated(pageNumber - 1));
   };
 
   const renderFooter = () => {
