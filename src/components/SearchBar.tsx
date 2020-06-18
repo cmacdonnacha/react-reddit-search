@@ -9,7 +9,6 @@ interface Props {
   ariaLabel?: string;
   type?: string;
   onSearchTextChanged: (text: string) => void;
-  onEnter: () => void;
 }
 
 const Input = styled.input`
@@ -32,7 +31,7 @@ const Input = styled.input`
   }
 `;
 
-const SearchBar = ({ placeholder, value, ariaLabel, type, onSearchTextChanged, onEnter }: Props) => {
+const SearchBar = ({ placeholder, value, ariaLabel, type, onSearchTextChanged }: Props) => {
   const defaultValue = value || '';
   const [inputText, setInputText] = useState(defaultValue);
 
@@ -44,22 +43,7 @@ const SearchBar = ({ placeholder, value, ariaLabel, type, onSearchTextChanged, o
     onSearchTextChanged(e.target.value);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter') {
-      onEnter();
-    }
-  };
-
-  return (
-    <Input
-      value={inputText}
-      onChange={onTextChanged}
-      placeholder={placeholder}
-      aria-label={ariaLabel}
-      type={type}
-      onKeyDown={handleKeyDown}
-    ></Input>
-  );
+  return <Input value={inputText} onChange={onTextChanged} placeholder={placeholder} aria-label={ariaLabel} type={type}></Input>;
 };
 
 export default SearchBar;

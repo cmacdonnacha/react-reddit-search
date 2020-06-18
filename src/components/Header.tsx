@@ -8,6 +8,7 @@ import userProfileImage from 'assets/user-profile.png';
 import Avatar from './Avatar';
 import { useDispatch } from 'react-redux';
 import { searchTextUpdated, fetchPosts } from 'slices/postsSlice';
+import debounce from 'lodash/debounce';
 
 const Container = styled.header`
   grid-area: header;
@@ -49,22 +50,19 @@ const Header = () => {
 
   const handleSearchTextChanged = (text: string) => {
     setSearchText(text);
-  };
-
-  const handleOnEnter = () => {
-    dispatch(searchTextUpdated(searchText));
+    dispatch(searchTextUpdated(text));
     dispatch(fetchPosts());
   };
+
+  // Only perform the search 500ms after the user has stopped typing.
+  // This helps reduce unnecessary network requests
+  const debouncedSearch = debounce(handleSearchTextChanged, 500);
 
   return (
     <Container>
       <RedditLogo src={redditLogo} />
       <RedditIcon src={redditIcon} />
-      <SearchBar
-        placeholder={'Type subreddit name and press enter'}
-        onSearchTextChanged={handleSearchTextChanged}
-        onEnter={handleOnEnter}
-      />
+      <SearchBar placeholder={'Type a subreddit name'} onSearchTextChanged={debouncedSearch} value={searchText} type="search" />
       <Username>Cathal Mac Donnacha</Username>
       <Avatar src={userProfileImage} />
     </Container>

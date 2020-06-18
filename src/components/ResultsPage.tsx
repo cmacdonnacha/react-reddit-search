@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { fetchPosts } from 'slices/postsSlice';
 import PageFooter from './PageFooter';
 import { screenSize } from 'constants/screenSizes';
+import NoSubredditFound from './NoSubredditFound';
 
 const Container = styled.section`
   display: flex;
@@ -58,7 +59,7 @@ const ResultsPage = () => {
     }
 
     if (hasErrors) {
-      return <span>Could not find subreddit</span>;
+      return <NoSubredditFound />;
     }
 
     return <Posts />;
@@ -68,7 +69,7 @@ const ResultsPage = () => {
     <Container>
       <Title>{subreddit}</Title>
       <Content>{renderPageContent()}</Content>
-      {posts.length > 0 && <PageFooter />}
+      {posts.length > 0 && !hasErrors && <PageFooter />}
     </Container>
   );
 };

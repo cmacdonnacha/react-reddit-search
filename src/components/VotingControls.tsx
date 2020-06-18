@@ -13,7 +13,6 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* margin-right: 10px; */
 `;
 
 const UpvoteIcon = styled(UpArrowIcon)`
@@ -26,14 +25,14 @@ const DownvoteIcon = styled(DownArrowIcon)`
 
 const UpvotesText = styled.span`
   color: ${colours.navy};
-  margin: 15px 0;
+  margin: 11px 0;
+  font-size: 0.9rem;
 `;
 
 const VoteButton = styled.button`
   background-color: ${colours.lightOrange};
   height: 30px;
   width: 50px;
-  /* margin: 15px; */
   border: none;
   border-radius: 3px;
   cursor: pointer;
@@ -56,7 +55,7 @@ const VotingControls = ({ votes }: Props) => {
         <UpvoteIcon size={32} />
       </VoteButton>
       <UpvotesText>{votes}</UpvotesText>
-      <VoteButton>
+      <VoteButton title="Feature not yet available">
         <DownvoteIcon size={32} />
       </VoteButton>
     </Container>

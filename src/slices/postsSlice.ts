@@ -71,8 +71,8 @@ export const postsSelector = (state: RootState) => state.posts;
 // The reducer. Again this is exposed by the 'postsSlice' object created above. In the old Redux this was the equivalent to returning the current posts state inside a separate `postsReducer.ts` file.
 export default postsSlice.reducer;
 
-function getSelectedSubreddit(state: PostsState) {
-  const subreddit = state.searchText ? state.searchText : DEFAULT_SUBREDDIT;
+function getSelectedSubreddit(state: RootState) {
+  const subreddit = state.posts.searchText ? state.posts.searchText : DEFAULT_SUBREDDIT;
   return subreddit;
 }
 
@@ -82,11 +82,12 @@ export function fetchPosts(customUrl?: string) {
     try {
       dispatch(getPostsStarted());
 
-      const subreddit = getSelectedSubreddit(getState().posts);
+      const subreddit = getSelectedSubreddit(getState());
       const defaultUrl = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}`;
       const url = customUrl || defaultUrl;
 
       const data = await RedditAPI.getPosts(url);
+
       dispatch(getPostsSuccess(data.posts));
       dispatch(nextPageIdUpdated(data.nextPageId));
       dispatch(previousPageIdUpdated(data.previousPageId));
@@ -100,9 +101,10 @@ export function fetchPosts(customUrl?: string) {
 export function fetchNextPosts() {
   return async (dispatch: ThunkDispatch<RootState, AnyAction, Action>, getState: () => RootState) => {
     try {
-      const subreddit = getSelectedSubreddit(getState().posts);
+      const subreddit = getSelectedSubreddit(getState());
       const url = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}&count=10&after=${getState().posts.nextPageId}`;
 
+      // Re-use the logic inside fetchPosts by sending the url we need
       dispatch(fetchPosts(url));
     } catch (error) {
       dispatch(getPostsFailed());
@@ -114,9 +116,10 @@ export function fetchNextPosts() {
 export function fetchPreviousPosts() {
   return async (dispatch: ThunkDispatch<RootState, AnyAction, Action>, getState: () => RootState) => {
     try {
-      const subreddit = getSelectedSubreddit(getState().posts);
+      const subreddit = getSelectedSubreddit(getState());
       const url = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}&count=10&before=${getState().posts.previousPageId}`;
 
+      // Re-use the logic inside fetchPosts by sending the url we need
       dispatch(fetchPosts(url));
     } catch (error) {
       dispatch(getPostsFailed());

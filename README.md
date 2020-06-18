@@ -28,12 +28,13 @@
 
 - [Redux Toolkit][redux-toolkit]
 - [Typescript][typescript]
+- [Styled Components][styled-components]
+- [Styled Icons Pack][styled-icons]
 - [Jest][jest]
 - [React Testing Library][react-testing-library]
 - [ESLint][eslint]
 - [Prettier][prettier]
 - [Github Actions CI/CD][github-actions]
-- [Styled Icons Pack][styled-icons]
 - [Source Map Explorer][source-map-explorer] to analyze code bloat
 
 &nbsp;
@@ -42,6 +43,7 @@
 
 <span>🔍 &nbsp; Search subreddit posts</span></br>
 <span>📞 &nbsp; Mobile friendly / Responsive design</span></br>
+<span>🔍 &nbsp; Error handling</span></br>
 <span>♿ &nbsp; Accessability compliant</span></br>
 <span>🧪 &nbsp; Unit & Integration tests</span></br>
 <span>🚢 &nbsp; Continuos Integration & Deployment</span></br>
@@ -135,4 +137,5 @@ Licensed under the MIT license.
 [prettier]: https://prettier.io/docs/en/index.html
 [github-actions]: https://github.com/cmacdonnacha/react-reddit-search/actions
 [styled-icons]: https://styled-icons.js.org/
+[styled-components]: https://styled-components.com/
 <!-- prettier-ignore-end -->
