@@ -71,9 +71,15 @@ export const postsSelector = (state: RootState) => state.posts;
 // The reducer. Again this is exposed by the 'postsSlice' object created above. In the old Redux this was the equivalent to returning the current posts state inside a separate `postsReducer.ts` file.
 export default postsSlice.reducer;
 
-function getSelectedSubreddit(state: RootState) {
-  const subreddit = state.posts.searchText ? state.posts.searchText : DEFAULT_SUBREDDIT;
-  return subreddit;
+/**
+ * Gets the base url used when calling the Reddit REST api.
+ *
+ * Extracting the base url here to avoid duplication.
+ */
+function getBaseUrl(state: RootState) {
+  const subreddit = state.posts.searchText || DEFAULT_SUBREDDIT;
+  const baseUrl = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}`;
+  return baseUrl;
 }
 
 // Asynchronous thunk action to fetch posts
@@ -82,10 +88,8 @@ export function fetchPosts(customUrl?: string) {
     try {
       dispatch(getPostsStarted());
 
-      const subreddit = getSelectedSubreddit(getState());
-      const defaultUrl = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}`;
-      const url = customUrl || defaultUrl;
-
+      const baseUrl = getBaseUrl(getState());
+      const url = customUrl || baseUrl;
       const data = await RedditAPI.getPosts(url);
 
       dispatch(getPostsSuccess(data.posts));
@@ -101,11 +105,13 @@ export function fetchPosts(customUrl?: string) {
 export function fetchNextPosts() {
   return async (dispatch: ThunkDispatch<RootState, AnyAction, Action>, getState: () => RootState) => {
     try {
-      const subreddit = getSelectedSubreddit(getState());
-      const url = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}&count=10&after=${getState().posts.nextPageId}`;
+      const baseUrl = getBaseUrl(getState());
 
-      // Re-use the logic inside fetchPosts by sending the url we need
-      dispatch(fetchPosts(url));
+      // Specify the id of the next batch of posts to get
+      const customUrl = `${baseUrl}&count=${POSTS_LIMIT}&after=${getState().posts.nextPageId}`;
+
+      // Fetch next posts using custom url
+      dispatch(fetchPosts(customUrl));
     } catch (error) {
       dispatch(getPostsFailed());
     }
@@ -116,11 +122,13 @@ export function fetchNextPosts() {
 export function fetchPreviousPosts() {
   return async (dispatch: ThunkDispatch<RootState, AnyAction, Action>, getState: () => RootState) => {
     try {
-      const subreddit = getSelectedSubreddit(getState());
-      const url = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}&count=10&before=${getState().posts.previousPageId}`;
+      const baseUrl = getBaseUrl(getState());
 
-      // Re-use the logic inside fetchPosts by sending the url we need
-      dispatch(fetchPosts(url));
+      // Specify the id of the previous batch of posts to get
+      const customUrl = `${baseUrl}&count=${POSTS_LIMIT}&before=${getState().posts.previousPageId}`;
+
+      // Fetch previous posts using custom url
+      dispatch(fetchPosts(customUrl));
     } catch (error) {
       dispatch(getPostsFailed());
     }
