@@ -45,6 +45,17 @@
 
 &nbsp;
 
+## Set up
+
+1. `git clone https://github.com/cmacdonnacha/react-reddit-search.git react-reddit-search`
+2. `cd react-reddit-search`
+3. `npm install`
+4. `npm start`
+5. Go to http://localhost:3000/react-reddit-search
+6. That's it! See the **Available Commands** list below for more.
+
+&nbsp;
+
 ## Features
 
 <h3>🔍 &nbsp; Search subreddit posts</h3>
@@ -78,17 +89,6 @@
 </br><h3>🚢 &nbsp; Continuos Integration & Deployment with [Github Actions][github-actions]</h3>
 
 ![CI/CD Screenshot](https://i.imgur.com/FGC93YO.png)
-
-&nbsp;
-
-## Set up
-
-1. `git clone https://github.com/cmacdonnacha/react-reddit-search.git react-reddit-search`
-2. `cd react-reddit-search`
-3. `npm install`
-4. `npm start`
-5. Go to http://localhost:3000/react-reddit-search
-6. That's it! See the **Available Commands** list below for more.
 
 &nbsp;
 
