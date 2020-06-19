@@ -1,7 +1,7 @@
 import React from 'react';
 import ResultsPage from './ResultsPage';
 import { renderWithRedux } from 'utils/test-utils';
-import { screen, waitForElementToBeRemoved, fireEvent } from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import axios from 'axios';
 
 // Mock the Axios module. This ensure we don't call a real rest api while running tests.

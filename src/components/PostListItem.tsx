@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import { Post } from 'models/Post';
 import { colours } from 'constants/colours';
@@ -44,11 +44,18 @@ const Title = styled.h4`
 `;
 
 const PostListItem = ({ post }: Props) => {
-  const thumbnail = post.thumbnail !== 'self' ? post.thumbnail : redditIcon;
+  // Use the default reddit icon if a thumbnail is not found (e.g it's a self post)
+  const postThumbnail = !post.thumbnail || post.thumbnail === 'self' ? redditIcon : post.thumbnail;
+  const [thumbnail, setThumbnail] = useState(postThumbnail);
 
+  // If we do receive a url but the image fails to load then fallback.
+  // We don't rely on this by default as waiting for the "onError" event would cause a slight delay.
+  const onImageLoadFailed = () => {
+    setThumbnail(redditIcon);
+  };
   return (
     <Container>
-      <Thumbnail src={thumbnail} alt="Post Thumbnail"></Thumbnail>
+      <Thumbnail src={thumbnail} alt="Post Thumbnail" onError={onImageLoadFailed}></Thumbnail>
       <Title>{post.title}</Title>
       <VotingControls votes={post.upvotes} />
     </Container>
