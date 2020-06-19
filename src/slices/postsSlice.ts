@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, Action, ThunkDispatch, AnyAction } from '@r
 import { RootState } from '.';
 import { Post } from 'models/Post';
 import RedditAPI from 'services/RedditAPI';
-import { REDDIT_URL, POSTS_LIMIT, DEFAULT_SUBREDDIT } from '../constants';
+import { POSTS_LIMIT } from '../constants';
 
 export interface PostsState {
   isLoading: boolean;
@@ -71,24 +71,13 @@ export const postsSelector = (state: RootState) => state.posts;
 // The reducer. Again this is exposed by the 'postsSlice' object created above. In the old Redux this was the equivalent to returning the current posts state inside a separate `postsReducer.ts` file.
 export default postsSlice.reducer;
 
-/**
- * Gets the base url used when calling the Reddit REST api.
- *
- * Extracting the base url here to avoid duplication.
- */
-function getBaseUrl(state: RootState) {
-  const subreddit = state.posts.searchText || DEFAULT_SUBREDDIT;
-  const baseUrl = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}`;
-  return baseUrl;
-}
-
 // Asynchronous thunk action to fetch posts
 export function fetchPosts(customUrl?: string) {
   return async (dispatch: ThunkDispatch<RootState, AnyAction, Action>, getState: () => RootState) => {
     try {
       dispatch(getPostsStarted());
 
-      const baseUrl = getBaseUrl(getState());
+      const baseUrl = RedditAPI.getBaseUrl(getState());
       const url = customUrl || baseUrl;
       const data = await RedditAPI.getPosts(url);
 
@@ -105,7 +94,7 @@ export function fetchPosts(customUrl?: string) {
 export function fetchNextPosts() {
   return async (dispatch: ThunkDispatch<RootState, AnyAction, Action>, getState: () => RootState) => {
     try {
-      const baseUrl = getBaseUrl(getState());
+      const baseUrl = RedditAPI.getBaseUrl(getState());
 
       // Specify the id of the next batch of posts to get
       const customUrl = `${baseUrl}&count=${POSTS_LIMIT}&after=${getState().posts.nextPageId}`;
@@ -122,7 +111,7 @@ export function fetchNextPosts() {
 export function fetchPreviousPosts() {
   return async (dispatch: ThunkDispatch<RootState, AnyAction, Action>, getState: () => RootState) => {
     try {
-      const baseUrl = getBaseUrl(getState());
+      const baseUrl = RedditAPI.getBaseUrl(getState());
 
       // Specify the id of the previous batch of posts to get
       const customUrl = `${baseUrl}&count=${POSTS_LIMIT}&before=${getState().posts.previousPageId}`;

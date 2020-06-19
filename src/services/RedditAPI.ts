@@ -1,7 +1,12 @@
 import { Post } from 'models/Post';
 import FetchAPI from './FetchAPI';
+import { REDDIT_URL, POSTS_LIMIT, DEFAULT_SUBREDDIT } from '../constants';
+import { RootState } from 'slices';
 
 const RedditAPI = {
+  /**
+   * Gets reddit posts
+   */
   getPosts: async (url: string) => {
     const response = await FetchAPI.get(url);
     const data = response.data.children;
@@ -24,6 +29,16 @@ const RedditAPI = {
       nextPageId,
       previousPageId,
     };
+  },
+  /**
+   * Gets the base url used when calling the Reddit REST api.
+   *
+   * Extracting the base url here to avoid duplication.
+   */
+  getBaseUrl: (state: RootState) => {
+    const subreddit = state.posts.searchText || DEFAULT_SUBREDDIT;
+    const baseUrl = `${REDDIT_URL}/r/${subreddit}.json?limit=${POSTS_LIMIT}`;
+    return baseUrl;
   },
 };
 
