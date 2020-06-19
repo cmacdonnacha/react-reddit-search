@@ -16,7 +16,7 @@ const Button = styled.button<Props>`
   font-size: 0.9rem;
   border: none;
   border-radius: 5px;
-  color: ${colours.grey4};
+  color: ${colours.grey6};
   font-weight: bold;
   background-color: ${(props) => (props.isActive ? `${colours.grey}` : 'white')};
   margin: 0 5px;

@@ -21,7 +21,6 @@ const Container = styled.div`
     border: none;
     background: ${colours.grey};
     padding: 0 8px;
-    color: ${colours.grey4};
     cursor: pointer;
   }
 `;
