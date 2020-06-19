@@ -67,7 +67,7 @@ const ResultsPage = () => {
 
   return (
     <Container>
-      <Title>{subreddit}</Title>
+      {!hasErrors && <Title>{subreddit}</Title>}
       <Content>{renderPageContent()}</Content>
       {posts.length > 0 && !hasErrors && <PageFooter />}
     </Container>
