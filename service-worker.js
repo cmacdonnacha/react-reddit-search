@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/react-reddit-search/precache-manifest.3176d2d89454625aa2fe65dff20fe7b5.js"
+  "/react-reddit-search/precache-manifest.5e72be07e88bc6c8730bb46dbf2f48a2.js"
 );
 
 self.addEventListener('message', (event) => {
