@@ -44,6 +44,7 @@
 <span>🔍 &nbsp; Search subreddit posts</span></br>
 <span>📞 &nbsp; Mobile friendly / Responsive design</span></br>
 <span>🔍 &nbsp; Error handling</span></br>
+<span>📃 &nbsp; Pagination</span></br>
 <span>♿ &nbsp; Accessability compliant</span></br>
 <span>🧪 &nbsp; Unit & Integration tests</span></br>
 <span>🚢 &nbsp; Continuos Integration & Deployment</span></br>
