@@ -56,42 +56,6 @@
 
 &nbsp;
 
-## Features
-
-<h3>🔍 &nbsp; Search subreddit posts</h3>
-
-![Searching Demo](src/assets/demo-videos/searching.gif)
-
-</br><h3>🔥 &nbsp; Sort by Hot, New, Top, Controversial & Rising</h3>
-
-![Sorting Demo](src/assets/demo-videos/sorting.gif)
-
-</br><h3>📃 &nbsp; Next and Previous pagination</h3>
-
-![Pagination Demo](src/assets/demo-videos/pagination.gif)
-
-</br><h3>📞 &nbsp; Mobile friendly / Responsive design</h3>
-
-![Responsive Design Demo](src/assets/demo-videos/responsive.gif)
-
-</br><h3>🔨 &nbsp; Error Handling</h3>
-
-![Error Handling Demo](src/assets/demo-videos/error-handling.gif)
-
-</br><h3>♿ &nbsp; 100% Accessability Compliance (via Lighthouse)</h3>
-
-![Accessability Compliance Screenshot](https://i.imgur.com/etZAxj8.png)
-
-</br><h3>🧪 &nbsp; Unit & Integration tests</h3>
-
-![Tests Screenshot](https://i.imgur.com/9EOsTzc.png)
-
-</br><h3>🚢 &nbsp; Continuos Integration & Deployment with [Github Actions][github-actions]</h3>
-
-![CI/CD Screenshot](https://i.imgur.com/FGC93YO.png)
-
-&nbsp;
-
 ## Available Commands
 
 ### `npm start`
@@ -129,6 +93,42 @@ It correctly bundles React in production mode and optimizes the build for the be
 ### `npm run analyze`
 
 This will run a production build and then analyze the output using [source-map-explorer] which analyzes JavaScript bundles using the source maps. This helps you understand where code bloat is coming from.
+
+&nbsp;
+
+## Features
+
+<h3>🔍 &nbsp; Search subreddit posts</h3>
+
+![Searching Demo](src/assets/demo-videos/searching.gif)
+
+</br><h3>🔥 &nbsp; Sort by Hot, New, Top, Controversial & Rising</h3>
+
+![Sorting Demo](src/assets/demo-videos/sorting.gif)
+
+</br><h3>📃 &nbsp; Next and Previous pagination</h3>
+
+![Pagination Demo](src/assets/demo-videos/pagination.gif)
+
+</br><h3>📞 &nbsp; Mobile friendly / Responsive design</h3>
+
+![Responsive Design Demo](src/assets/demo-videos/responsive.gif)
+
+</br><h3>🔨 &nbsp; Error Handling</h3>
+
+![Error Handling Demo](src/assets/demo-videos/error-handling.gif)
+
+</br><h3>♿ &nbsp; 100% Accessability Compliance (via Lighthouse)</h3>
+
+![Accessability Compliance Screenshot](https://i.imgur.com/etZAxj8.png)
+
+</br><h3>🧪 &nbsp; Unit & Integration tests</h3>
+
+![Tests Screenshot](https://i.imgur.com/9EOsTzc.png)
+
+</br><h3>🚢 &nbsp; Continuos Integration & Deployment with [Github Actions][github-actions]</h3>
+
+![CI/CD Screenshot](https://i.imgur.com/FGC93YO.png)
 
 &nbsp;
 
