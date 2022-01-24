@@ -1,6 +1,0 @@
-node_modules/
-src/serviceWorker.ts
-public/
-.eslintrc.js
-.prettierrc.js
-src/react-app-env.d.ts
