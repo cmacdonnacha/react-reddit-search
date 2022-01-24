@@ -1,0 +1,86 @@
+{
+  "name": "react-reddit-search",
+  "version": "1.0.0",
+  "homepage": "https://cmacdonnacha.github.io/react-reddit-search/",
+  "description": "This project shows usage of the Reddit API using ReactJS, Redux Toolkit and Typescript",
+  "license": "MIT",
+  "scripts": {
+    "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'",
+    "build": "react-scripts build",
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "eject": "react-scripts eject",
+    "lint": "tsc --noEmit && eslint . --ext .ts,.tsx",
+    "test:no-watch": "react-scripts test --watchAll=false --env=jest-environment-jsdom-sixteen",
+    "test:coverage": "react-scripts test --coverage --watchAll=false --env=jest-environment-jsdom-sixteen"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && npm run lint",
+      "pre-push": "npm run test:no-watch"
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,ts,tsx}",
+      "!/node_modules/",
+      "!src/utils/**/*",
+      "!src/models/**/*",
+      "!src/constants/**/*",
+      "!src/index.tsx",
+      "!src/serviceWorker.ts",
+      "!src/react-app-env.d.ts"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.3.5",
+    "axios": "^0.19.2",
+    "lodash": "^4.17.15",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "styled-components": "^5.1.0",
+    "styled-icons": "^10.2.1",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.3",
+    "@testing-library/user-event": "^10.1.0",
+    "@types/jest": "^25.2.1",
+    "@types/lodash": "^4.14.155",
+    "@types/node": "^13.13.4",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
+    "@types/react-redux": "^7.1.7",
+    "@types/styled-components": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "babel-plugin-macros": "^2.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "husky": "^4.2.5",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
+    "react-scripts": "3.4.1",
+    "source-map-explorer": "^2.4.2"
+  }
+}
