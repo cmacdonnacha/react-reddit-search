@@ -17,9 +17,6 @@
     <img src="https://github.com/cmacdonnacha/react-reddit-search/workflows/Continuous%20Integration/badge.svg" />
   </a>
   <a>
-    <img src="https://img.shields.io/david/cmacdonnacha/react-reddit-search.svg" />
-  </a>
-  <a>
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="contributions" />
   </a>
 </p>
